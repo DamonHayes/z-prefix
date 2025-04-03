@@ -12,7 +12,6 @@ export default function Home() {
         <>
             <div>
                 <Inventory />
-                <Link to="/login">LOG IN</Link>
             </div>   
         </>
     )

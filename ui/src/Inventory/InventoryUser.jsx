@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import './Inventory.css'
 import '../LogIn/Login.css'
 import { useLocation } from "react-router-dom";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function InventoryUser(Userid) {
     const location = useLocation()
@@ -15,6 +16,7 @@ export default function InventoryUser(Userid) {
     const [itemid, setItemid] = useState(0)
     const [patchValues, setPatchValues] = useState({user_id: id, item_name: '', description: '', quantity: 0})
     const [postValues, setPostValues] = useState({user_id: id, item_name: '', description: '', quantity: 0})
+    const [loggedIn, setLoggedIn] = useLocalStorage('loggedIn')
 
     
 
@@ -145,6 +147,7 @@ export default function InventoryUser(Userid) {
             </div>
             {/* TABLE */}
             <div className="table-div" hidden={!editform || !addform}>
+                <h1>{loggedIn ? loggedIn.user_name : 'Unknown'}'s Inventory</h1>
                 <table className="table-container">
                     <thead>
                         <tr>

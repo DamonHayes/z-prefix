@@ -1,6 +1,7 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from 'react-router'
 import { useNavigate } from "react-router";
+import { useLocalStorage } from "@uidotdev/usehooks"
 import './Login.css'
 import bcrypt from "bcryptjs-react"
 
@@ -8,6 +9,7 @@ export default function Login(){
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [data, setData] = useState('')
+    const [loggedIn, setLoggedIn] = useLocalStorage('loggedIn')
     const navigate = useNavigate()
     const saltRounds = 10;
 
@@ -16,6 +18,7 @@ export default function Login(){
             .then(res => res.json())
             .then(json => setData(json))
     }, [])
+
 
     function HandleUserNameChange(event){
         setUserName(event.target.value)
@@ -27,7 +30,7 @@ export default function Login(){
     
 
     function submit(){
-        var loggedIn = false;
+        var loggedInbool = false;
         var userid = 0
         if(data){
             for(let i of data){
@@ -36,7 +39,8 @@ export default function Login(){
                     var hash = bcrypt.hashSync(password, salt)
                     if(bcrypt.compare(i.password, hash)){
                         alert("Successful Login");
-                        loggedIn = true;
+                        setLoggedIn(i)
+                        loggedInbool = true;
                         userid = i.id;
                     }
                 }
@@ -45,7 +49,7 @@ export default function Login(){
 
         
 
-        if(!loggedIn){
+        if(!loggedInbool){
             alert("Incorrect Password or username")
         }else(
             navigate('/Inventory/' + userid, {state: {id: userid}})
@@ -68,7 +72,6 @@ export default function Login(){
                     <input type="text" placeholder="PASSWORD" onChange={HandlePasswordChange}/>
                     <button className="login-submit" onClick={()=>{submit()}}>SUBMIT</button>
                 </form>
-                <button onClick={()=>{submit()}}></button>
                 <div className="login-links">
                     <Link to="/createUser">Create Account</Link>
                     <Link to="/forgotPassword">Forgot Password</Link>

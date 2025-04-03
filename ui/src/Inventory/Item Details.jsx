@@ -46,11 +46,10 @@ export default function ItemDetail(){
 
     return (
         <>
-            <h1>{data[0].item_name}</h1>
+            <h1>Item Name: {data[0].item_name}</h1>
             <h2>Owner: {username}</h2>
-            <h2>{data[0].quantity}</h2>
-            <p>{data[0].description}</p>
-
+            <h2>Quantity: {data[0].quantity}</h2>
+            <p>Description: {data[0].description}</p>
         </>
     )
 }

@@ -7,18 +7,41 @@ import bcrypt from 'bcryptjs-react'
 
 export default function CreateUser() {
     const [postValues, setPostValues ] = useState({first_name: '', last_name: '', user_name: '', password: ''})
+    const [userData, setUserData] = useState([])
     const navigate = useNavigate()
     const saltRounds = 10;
+
+    useEffect(() => {
+        fetch('http://localhost:8081/users')
+            .then(res => res.json())
+            .then(res2 => setUserData(res2))
+    }, [])
     
     
 
 
     const handleChange = (event) => {
         var { name, value } = event.target
+        console.log(bcrypt.hashSync(postValues.password, saltRounds))
         setPostValues(e => ({...e, [name]: value}))
     }
 
     const submit = () => {
+
+        //checks for empty fields
+        if(postValues.first_name == "" || postValues.last_name == "" || postValues.password == "" || postValues.user_name == ""){
+            alert("All fields must be filled out")
+            return
+        }
+        
+        //checks for existing user
+        for(let i of userData){
+            if(i.user_name == postValues.user_name){
+                alert("User already exist with that username, choose another one")
+                return
+            }
+        }
+
 
         postValues.password = bcrypt.hashSync(postValues.password, saltRounds)
 

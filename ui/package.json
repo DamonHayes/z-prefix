@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
     "bcrypt": "^5.1.1",
     "bcryptjs-react": "^2.4.6",
     "hamburger-react": "^2.5.2",
