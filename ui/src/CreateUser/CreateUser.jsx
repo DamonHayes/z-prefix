@@ -2,18 +2,25 @@ import { useEffect, useState} from "react";
 import { Link } from 'react-router'
 import { useNavigate } from "react-router";
 import "../LogIn/Login.css"
+import bcrypt from 'bcryptjs-react'
+
 
 export default function CreateUser() {
     const [postValues, setPostValues ] = useState({first_name: '', last_name: '', user_name: '', password: ''})
     const navigate = useNavigate()
+    const saltRounds = 10;
+    
+    
 
 
     const handleChange = (event) => {
-        const { name, value } = event.target
+        var { name, value } = event.target
         setPostValues(e => ({...e, [name]: value}))
     }
 
     const submit = () => {
+
+        postValues.password = bcrypt.hashSync(postValues.password, saltRounds)
 
         fetch('http://localhost:8081/users', {
             method: 'POST',
@@ -47,8 +54,9 @@ export default function CreateUser() {
                     <input type="text" name="password" placeholder="Password" value={postValues.password} onChange={handleChange}/>
                     <button className="login-submit" onClick={() => {submit()}}>SUBMIT</button>
                 </form>
+                <button onClick={() => {submit()}}></button>
                 <div className="login-links">
-                    <Link to="/createUser">Back to Login</Link>
+                    <Link to="/Login">Back to Login</Link>
                     <Link to="/forgotPassword">Forgot Password</Link>
                 </div>
             </div>

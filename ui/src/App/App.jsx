@@ -22,7 +22,6 @@ function App() {
         <Hamburger toggled={isOpen} toggle={setOpen} className="hamburger"/>
         <div className='nav-links' hidden={!isOpen}>
           <ul>
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/Inventory">Inventory</Link></li>
             <li><Link to="/login">Log-In</Link></li>
           </ul>
