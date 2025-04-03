@@ -28,7 +28,7 @@ function App() {
             <li><Link to="/Inventory">Global Inventory</Link></li>
             <li><Link to={loggedIn ? `/Inventory/${loggedIn.id}` : ""} hidden={!loggedIn} >Your Inventory</Link></li>
             <li><Link to="/login" hidden={loggedIn}>Log-In</Link></li>
-            <li><Link onClick={() => {setLoggedIn(null)}} hidden={!loggedIn}>Log Out</Link></li>
+            <li><Link onClick={() => {setLoggedIn(null)}} hidden={!loggedIn} to='/login'>Log Out</Link></li>
           </ul>
         </div>
         <h1 className='header' hidden={loggedIn}>Inventory App</h1>

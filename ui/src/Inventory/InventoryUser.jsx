@@ -56,6 +56,10 @@ export default function InventoryUser(Userid) {
 
     function addItem(){
 
+        if(postValues.item_name == "" || postValues.description == ""){
+            return
+        }
+
         fetch(`http://localhost:8081/items`, {
             method: 'POST',
             mode: 'cors',

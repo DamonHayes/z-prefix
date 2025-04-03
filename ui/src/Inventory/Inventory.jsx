@@ -21,8 +21,9 @@ export default function Inventory() {
     }, [data])
 
     function shorten(essay){
-        if(essay.length > 100){
-            essay = essay.slice(100) + "..."
+        if(essay.length >= 100){
+            essay = essay.slice(0, 100) + "..."
+            return essay
         }else{
             return essay
         }
