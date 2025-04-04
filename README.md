@@ -1,14 +1,5 @@
 # z-prefix
 
-Things to do:
-
-- forgot password
-- CSS for individual item
-- read me
-
-
-
-
 
 Install and Run
 - Ensure that you have a postgres connection string and a database named "Inventory" in your postgres
@@ -27,3 +18,10 @@ Install and Run
 - Open a second terminal in vscode and run "cd ui"
 - run "npm install"
 - run "npm run dev", this will start the localhost website at port 5173
+
+
+exapmle login: 
+
+username: EatMyShorts
+Password: SkinnerSux
+

@@ -8,7 +8,7 @@
   "main": "knexfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "knex migrate:rollback && knex migrate:latest && knex seed:run && node server.js"
+    "start": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run && node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
